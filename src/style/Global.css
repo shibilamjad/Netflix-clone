@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rubik", sans-serif;
+}
+body {
+  /* background-image: url("../../public/bg.png");
+  background-size: cover; */
+}
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  --color-textColor: rgba(117, 117, 117, 1);
+  --color-logo: rgba(214, 45, 48, 1);
+  --color-light: #ffffff;
+  --color-black: #232f3e;
+  --color-febd69: #febd69;
+  --color-bf4800: #bf4800;
+  --color-ededed: #ededed;
+  --color-777: #777;
+  --color-1c1c1b: #1c1c1b;
+}
+ul {
+  list-style-type: none;
+}
+button {
+  cursor: pointer;
+}
