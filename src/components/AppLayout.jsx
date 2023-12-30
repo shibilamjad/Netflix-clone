@@ -34,16 +34,16 @@ const Main = styled.main`
     height: 100vh;
   }
   @media ${device.laptop} {
-    height: auto;
+    height: 100vh;
   }
   @media ${device.tablet} {
-    height: auto;
+    height: 100vh;
   }
   @media ${device.mobileL} {
-    height: auto;
+    height: 100vh;
   }
   @media ${device.mobileS} {
-    height: auto;
+    height: 100vh;
   }
 `;
 const Bg = styled.div`

@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components";
 import { device } from "../../ui/device";
+import { NavLink } from "react-router-dom";
 
 function Header() {
+  //  const isLogingPage =
+  const auth = false;
+
   return (
     <header>
       <HeaderContainer>
@@ -10,7 +14,9 @@ function Header() {
         </div>
         <BtnContainer>
           <BtnMode variation="mode">Light</BtnMode>
-          <BtnMode variation="logout">Logout</BtnMode>
+          <NavLink to="sign-in">
+            {auth && <BtnMode variation="logout">Logout</BtnMode>}
+          </NavLink>
         </BtnContainer>
       </HeaderContainer>
     </header>
