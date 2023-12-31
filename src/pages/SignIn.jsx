@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { device } from "../ui/device";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { MovieContext } from "../context/MovieContext";
+import { Spinner } from "react-bootstrap";
+// import { AuthContext } from "../context/AuthContext";
 
 export function SignIn() {
   const [field, setField] = useState({
@@ -13,21 +18,28 @@ export function SignIn() {
     password: false,
   });
 
+  const { isLoading, setIsLoading } = useContext(MovieContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (isValidateSubmit()) navigate("/", { replace: true });
+    if (isValidateSubmit()) {
+      setIsLoggedIn(true);
+      navigate("/");
+    }
   }
 
+  console.log(isLoading);
   function handleChange(e) {
     setField((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
-    handleBlur();
-    console.log(field);
+    handleBlur(e);
   }
+  // console.log(field);
   function isValidateSubmit() {
     const errors = {
       userName: false,
@@ -53,11 +65,13 @@ export function SignIn() {
   }
 
   function handleBlur(e) {
-    const { name, value, checked } = e.target;
+    const { name, value } = e.target;
     let error = false;
     if (name === "userName" && value === "") {
       error = true;
-    } else if ((name === "password" && value === "") || value.length < 6) {
+    } else if (name === "password" && value === "") {
+      error = true;
+    } else if (name === "password" && value.length < 6) {
       error = true;
     }
     setErrors((prev) => ({
@@ -83,7 +97,7 @@ export function SignIn() {
                 value={field.userName}
                 onBlur={handleBlur}
               />
-              {errors?.userName && <Error>Username is required</Error>}
+              {errors.userName && <Error>Username is required</Error>}
             </div>
             <div>
               <Input
@@ -162,7 +176,7 @@ const Stylecontent = styled.div`
   flex-direction: column;
   color: var(--color-light);
   padding: 48px 60px 0px 60px;
-  font-size: 32px;
+  font-size: 15px;
   font-weight: 700;
 
   @media ${device.laptopL} {
@@ -186,12 +200,12 @@ const H1 = styled.h1`
   font-size: 32px;
   @media ${device.laptop} {
     font-size: 28px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
   @media ${device.laptopL} {
     font-size: 25px;
 
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
   @media ${device.tablet} {
     font-size: 17px;
@@ -199,10 +213,10 @@ const H1 = styled.h1`
   }
   @media ${device.mobileL} {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   @media ${device.mobileS} {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 14px;
   }
 `;
@@ -308,7 +322,7 @@ const StyledSign = styled.div`
   justify-content: center;
   font-weight: 400;
   font-size: 17px;
-  margin-top: 100px;
+  margin-top: 80px;
   p {
     color: var(--color-textColor);
     margin-top: 1rem;
@@ -328,7 +342,6 @@ const StyledSign = styled.div`
   }
   @media ${device.mobileL} {
     font-size: 13px;
-
     margin-top: 10px;
   }
   @media ${device.mobileS} {

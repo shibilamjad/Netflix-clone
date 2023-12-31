@@ -1,10 +1,15 @@
 import styled, { css } from "styled-components";
 import { device } from "../../ui/device";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 function Header() {
-  //  const isLogingPage =
-  const auth = false;
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+
+  function handleClick() {
+    setIsLoggedIn((prev) => !prev);
+  }
 
   return (
     <header>
@@ -15,7 +20,11 @@ function Header() {
         <BtnContainer>
           <BtnMode variation="mode">Light</BtnMode>
           <NavLink to="sign-in">
-            {auth && <BtnMode variation="logout">Logout</BtnMode>}
+            {isLoggedIn && (
+              <BtnMode variation="logout" onClick={handleClick}>
+                Logout
+              </BtnMode>
+            )}
           </NavLink>
         </BtnContainer>
       </HeaderContainer>
