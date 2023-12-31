@@ -9,8 +9,35 @@ export function MovieProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  let initialItem = "s";
+
   function handleChange(e) {
     setQuery(e.target.value);
+  }
+
+  async function initialMovies() {
+    try {
+      setIsLoading(true);
+      setError("");
+      const res = await axios(`https://api.themoviedb.org/3/search/movie`, {
+        params: {
+          api_key: `d3449ff6ec0c027623bf6b6f5fff78b3`,
+          language: `en-US`,
+          page: 1,
+          include_adult: false,
+          query: initialItem,
+        },
+      });
+
+      const data = res.data;
+      setMovies(data.results);
+      if (data.results.length === 0) throw new Error("Movie not found ");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   }
   async function fetchMovies() {
     try {
@@ -37,6 +64,9 @@ export function MovieProvider({ children }) {
   }
 
   useEffect(() => {
+    if (!query) {
+      initialMovies();
+    }
     const timeout = setTimeout(() => {
       if (query) {
         fetchMovies();
