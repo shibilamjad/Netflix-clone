@@ -35,7 +35,7 @@ const Bg = styled.footer`
   align-content: center;
   justify-content: space-around;
   color: white;
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--color-blacklight);
   /* height: 213px; */
   width: 100%;
   color: var(--color-textColor);

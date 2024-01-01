@@ -3,13 +3,16 @@ import { device } from "../../ui/device";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { DarkModeContext } from "../../context/DarkModeContext";
 
 function Header() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-
+  // const { theme, setTheme } = useContext(DarkModeContext);
   function handleClick() {
     setIsLoggedIn((prev) => !prev);
   }
+
+  function handleTheme() {}
 
   return (
     <header>
@@ -18,7 +21,9 @@ function Header() {
           <Logo>Netflix</Logo>
         </div>
         <BtnContainer>
-          <BtnMode variation="mode">Light</BtnMode>
+          <BtnMode variation="mode" onClick={handleTheme}>
+            Light
+          </BtnMode>
           <NavLink to="sign-in">
             {isLoggedIn && (
               <BtnMode variation="logout" onClick={handleClick}>

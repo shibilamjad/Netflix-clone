@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import AppLayout from "./components/AppLayout";
 import { SignUp } from "./pages/SignUp";
 import { ProtectedRouter } from "./components/ProtectedRouter";
+import { ProtectedRouterLogin } from "./components/ProtectedRouterLogin";
+import { Error } from "./pages/Error";
 
 function App() {
   return (
@@ -18,8 +20,16 @@ function App() {
               </ProtectedRouter>
             }
           />
-          <Route path="/sign-in" element={<SignIn />} />
-          {/* <Route path="/sign-up" element={<SignUp />} /> */}
+          <Route
+            path="/sign-in"
+            element={
+              <ProtectedRouterLogin>
+                <SignIn />
+              </ProtectedRouterLogin>
+            }
+          />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>

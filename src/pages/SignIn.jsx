@@ -144,7 +144,7 @@ const LoginContainer = styled.div`
 `;
 
 const StyledLogin = styled.div`
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--color-blacklight);
   width: 457px;
   height: 547px;
   border-radius: 4px;
@@ -174,7 +174,7 @@ const StyledLogin = styled.div`
 const Stylecontent = styled.div`
   display: flex;
   flex-direction: column;
-  color: var(--color-light);
+  color: var(--color-textColor);
   padding: 48px 60px 0px 60px;
   font-size: 15px;
   font-weight: 700;
@@ -353,7 +353,7 @@ const StyledSign = styled.div`
 const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
-  color: var(--color-light);
+  color: var(--color-textColor);
 `;
 
 const AlignCenter = styled.div`
