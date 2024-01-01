@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthContext";
 
 export function ProtectedRouter({ children }) {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   useEffect(
     function () {
       if (!isLoggedIn) navigate("/sign-in");

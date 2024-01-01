@@ -6,33 +6,40 @@ import { SignUp } from "./pages/SignUp";
 import { ProtectedRouter } from "./components/ProtectedRouter";
 import { ProtectedRouterLogin } from "./components/ProtectedRouterLogin";
 import { Error } from "./pages/Error";
+import GlobalThemes from "./style/GlobalThemes";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AppLayout />}>
-          <Route
-            path="/"
-            element={
-              <ProtectedRouter>
-                <HomePage />
-              </ProtectedRouter>
-            }
-          />
-          <Route
-            path="/sign-in"
-            element={
-              <ProtectedRouterLogin>
-                <SignIn />
-              </ProtectedRouterLogin>
-            }
-          />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="*" element={<Error />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <DarkModeProvider>
+        <GlobalThemes />
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AppLayout />}>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRouter>
+                    <HomePage />
+                  </ProtectedRouter>
+                }
+              />
+              <Route
+                path="/sign-in"
+                element={
+                  <ProtectedRouterLogin>
+                    <SignIn />
+                  </ProtectedRouterLogin>
+                }
+              />
+              <Route path="/sign-up" element={<SignUp />} />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </DarkModeProvider>
+    </>
   );
 }
 

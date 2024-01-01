@@ -3,16 +3,17 @@ import { device } from "../../ui/device";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { DarkModeContext } from "../../context/DarkModeContext";
+import { useDarkMode } from "../../context/DarkModeContext";
+import { FaRegMoon } from "react-icons/fa";
+import { BsFillSunFill } from "react-icons/bs";
 
 function Header() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  // const { theme, setTheme } = useContext(DarkModeContext);
+  const { theme, handleClick: handleDarkMode } = useDarkMode();
+  console.log(theme);
   function handleClick() {
     setIsLoggedIn((prev) => !prev);
   }
-
-  function handleTheme() {}
 
   return (
     <header>
@@ -21,8 +22,8 @@ function Header() {
           <Logo>Netflix</Logo>
         </div>
         <BtnContainer>
-          <BtnMode variation="mode" onClick={handleTheme}>
-            Light
+          <BtnMode variation="mode" onClick={handleDarkMode}>
+            {theme ? <FaRegMoon /> : <BsFillSunFill />}
           </BtnMode>
           <NavLink to="sign-in">
             {isLoggedIn && (
@@ -68,6 +69,9 @@ const BtnMode = styled.button`
   font-size: 16px;
   font-weight: 500;
   ${(props) => variation[props.variation]}
+  svg {
+    padding: 0px;
+  }
 
   @media ${device.laptopL} {
     padding: 12px 18px;

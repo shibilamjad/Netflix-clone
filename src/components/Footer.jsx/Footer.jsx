@@ -4,55 +4,61 @@ import { device } from "../../ui/device";
 function Footer() {
   return (
     <>
-      <Bg>
-        <StyledFooter>
-          <FooterContainer>
-            <StyledContent>
-              <div>
-                <p>FAQ</p>
-                <p>Cookie Preferences</p>
-              </div>
-              <div>
-                <p>Help Center </p>
-                <p>Corporate Information </p>
-              </div>
-              <div>
-                <p>Terms of Use </p>
-                <p>Privacy </p>
-              </div>
-            </StyledContent>
-          </FooterContainer>
-        </StyledFooter>
-      </Bg>
+      <Container>
+        <Bg>
+          <StyledFooter>
+            <FooterContainer>
+              <StyledContent>
+                <Wrapper>
+                  <p>FAQ</p>
+                  <p>Cookie Preferences</p>
+                </Wrapper>
+                <Wrapper>
+                  <p>Help Center </p>
+                  <p>Corporate Information </p>
+                </Wrapper>
+                <Wrapper>
+                  <p>Terms of Use </p>
+                  <p>Privacy </p>
+                </Wrapper>
+              </StyledContent>
+            </FooterContainer>
+            <P>Questions? Call 1-844-505-2993</P>
+          </StyledFooter>
+        </Bg>
+      </Container>
     </>
   );
 }
 
 export default Footer;
-
-const Bg = styled.footer`
+const Container = styled.div`
   display: flex;
-  align-content: center;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
+`;
+const Bg = styled.footer`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
   background: var(--color-blacklight);
-  /* height: 213px; */
-  width: 100%;
+
   color: var(--color-textColor);
 `;
 
 const StyledFooter = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 30px;
   flex-direction: column;
-  align-items: center;
-  width: 60%;
+  align-items: start;
+
   height: 100%;
 
   h1 {
-    justify-content: start;
     background-color: red;
   }
 
@@ -67,14 +73,24 @@ const StyledFooter = styled.div`
 const FooterContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
 const StyledContent = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
   align-items: center;
-  justify-content: space-around;
-  flex-direction: row;
-  p {
-    /* padding-right: 230px; */
-  }
+  gap: 60px;
+  justify-content: center;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+`;
+
+const P = styled.p`
+  padding-top: 15px;
+  padding-left: 10px;
 `;
