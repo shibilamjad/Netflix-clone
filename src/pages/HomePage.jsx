@@ -2,25 +2,18 @@ import styled from "styled-components";
 
 import { useContext } from "react";
 import { MovieContext } from "../context/MovieContext";
-import { device } from "../ui/device";
 import { Loading } from "../ui/Loading";
 import { MoviesList } from "../components/MoviesList";
 import { ErrorMessage } from "../ui/ErrorMessage";
+import { SearchInput } from "../ui/SearchInput";
 
 function HomePage() {
-  const { query, handleChange, isLoading, error } = useContext(MovieContext);
+  const { isLoading, error } = useContext(MovieContext);
 
   return (
     <HomeContainer>
       <StyledHome>
-        <StyledInput>
-          <Input
-            type="text"
-            placeholder="Search movies..."
-            value={query}
-            onChange={handleChange}
-          />
-        </StyledInput>
+        <SearchInput />
         {isLoading && <Loading />}
         {!isLoading && !error && <MoviesList />}
         {error && <ErrorMessage message={error} />}
@@ -51,44 +44,4 @@ const StyledHome = styled.div`
   padding: 10px;
   width: 80%;
   margin-bottom: 20px;
-`;
-const StyledInput = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-`;
-const Input = styled.input`
-  width: 70%;
-  padding: 10px 15px;
-  border-radius: 20px;
-  border: transparent;
-  appearance: none;
-  color: var(--color-black);
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  &:focus {
-    outline: none;
-  }
-  @media ${device.mobileS} {
-    width: 70%;
-    padding: 8px 12px;
-  }
-  @media ${device.mobileL} {
-    width: 70%;
-    padding: 8px 12px;
-  }
-  @media ${device.tablet} {
-    width: 70%;
-    padding: 8px 12px;
-  }
-  @media ${device.laptop} {
-    width: 80%;
-    padding: 8px 12px;
-  }
-  @media ${device.laptopL} {
-    width: 80%;
-    padding: 8px 12px;
-  }
 `;

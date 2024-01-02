@@ -1,6 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-// Define the keyframes outside the styled component
 const spin = keyframes`
   0% {
     transform: rotate(0deg);
@@ -10,7 +9,6 @@ const spin = keyframes`
   }
 `;
 
-// Use the keyframes in the styled component
 const Loader = styled.div`
   top: 50%;
   left: 50%;

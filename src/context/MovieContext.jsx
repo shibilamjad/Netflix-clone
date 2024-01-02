@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
-import { Loading } from "../ui/Loading";
 
 export const MovieContext = createContext();
 

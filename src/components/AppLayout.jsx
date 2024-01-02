@@ -25,6 +25,7 @@ export default AppLayout;
 const StyledContainer = styled.div`
   background-color: #d30000;
   width: 100%;
+
   display: grid;
   background-image: url("../../public/bg.png");
   background-repeat: repeat;
@@ -51,8 +52,5 @@ const Main = styled.main`
   }
 `;
 const Bg = styled.div`
-  /* background-image: url("../../public/bg.png");
-  background-repeat: repeat;
-  height: 100%; */
   background-color: var(--color-bg);
 `;

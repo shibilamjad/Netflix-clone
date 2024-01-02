@@ -64,9 +64,6 @@ const StyledMovies = styled.ul`
 `;
 const MovieContainer = styled.li`
   box-sizing: border-box;
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: center; */
   align-items: center;
   /* margin: 50px 0px; */
   width: 160px;

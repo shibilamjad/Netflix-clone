@@ -55,7 +55,7 @@ const StyledFooter = styled.div`
   margin-top: 30px;
   flex-direction: column;
   align-items: start;
-
+  font-size: 15px;
   height: 100%;
 
   h1 {
@@ -63,9 +63,15 @@ const StyledFooter = styled.div`
   }
 
   @media ${device.mobileL} {
+    font-size: 10px;
     width: 80%;
   }
   @media ${device.mobileS} {
+    font-size: 10px;
+    width: 80%;
+  }
+  @media ${device.tablet} {
+    font-size: 12px;
     width: 80%;
   }
 `;
@@ -77,11 +83,30 @@ const FooterContainer = styled.div`
 `;
 const StyledContent = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 10px;
   align-items: center;
   gap: 60px;
   justify-content: center;
+  @media ${device.laptopL} {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: start;
+    gap: 10px;
+    padding: 1px;
+    margin: 5px;
+  }
+  @media ${device.mobileL} {
+    gap: 1px;
+    padding: 1px;
+    margin: 2px;
+  }
+  @media ${device.mobileS} {
+    gap: 1px;
+    padding: 1px;
+    margin: 2px;
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -93,4 +118,8 @@ const Wrapper = styled.div`
 const P = styled.p`
   padding-top: 15px;
   padding-left: 10px;
+  @media ${device.laptopL} {
+    padding-top: 1px;
+    padding-left: 1px;
+  }
 `;

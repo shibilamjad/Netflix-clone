@@ -18,7 +18,7 @@ export function SignIn() {
     password: false,
   });
 
-  const { isLoading, setIsLoading } = useContext(MovieContext);
+  const { isLoading, setQuery } = useContext(MovieContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -29,6 +29,7 @@ export function SignIn() {
       setIsLoggedIn(true);
       navigate("/");
     }
+    setQuery("");
   }
 
   console.log(isLoading);
@@ -39,7 +40,7 @@ export function SignIn() {
     }));
     handleBlur(e);
   }
-  // console.log(field);
+
   function isValidateSubmit() {
     const errors = {
       userName: false,
