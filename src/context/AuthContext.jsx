@@ -1,7 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
-export function AuthProvider({ children }) {
+function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     const isAuth = localStorage.getItem("isLoggedIn");
     if (isAuth) {
@@ -23,3 +23,12 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used with a AuthProvider");
+  }
+  return context;
+}
+export { AuthProvider, useAuth };

@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import { device } from "../ui/device";
-import { MovieContext } from "../context/MovieContext";
-import { useContext } from "react";
+import { useMovie } from "../context/MovieContext";
 
 export function MoviesList() {
-  const { movies } = useContext(MovieContext);
+  const { movies } = useMovie();
   return (
     <StyledMovies>
       {movies.map((movie) => (

@@ -6,11 +6,9 @@ import { MovieProvider } from "./context/MovieContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
   <MovieProvider>
     <AuthProvider>
       <App />
     </AuthProvider>
   </MovieProvider>
-  // </React.StrictMode>
 );

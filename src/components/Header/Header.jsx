@@ -1,16 +1,15 @@
 import styled, { css } from "styled-components";
 import { device } from "../../ui/device";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useDarkMode } from "../../context/DarkModeContext";
 import { FaRegMoon } from "react-icons/fa";
 import { BsFillSunFill } from "react-icons/bs";
 
 function Header() {
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   const { theme, handleClick: handleDarkMode } = useDarkMode();
-  console.log(theme);
+
   function handleClick() {
     setIsLoggedIn((prev) => !prev);
   }

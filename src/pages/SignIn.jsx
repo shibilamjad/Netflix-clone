@@ -2,11 +2,8 @@ import styled from "styled-components";
 import { device } from "../ui/device";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { MovieContext } from "../context/MovieContext";
-import { Spinner } from "react-bootstrap";
-// import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
+import { useMovie } from "../context/MovieContext";
 
 export function SignIn() {
   const [field, setField] = useState({
@@ -18,8 +15,8 @@ export function SignIn() {
     password: false,
   });
 
-  const { isLoading, setQuery } = useContext(MovieContext);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const { isLoading, setQuery } = useMovie();
+  const { setIsLoggedIn } = useAuth();
 
   const navigate = useNavigate();
 
@@ -127,7 +124,7 @@ export function SignIn() {
             <AlignCenter>
               <p>Not a member? </p>
               &nbsp;
-              <NavLink> Sign up now.</NavLink>
+              <NavLink to="/sign-up"> Sign up now.</NavLink>
             </AlignCenter>
           </StyledSign>
         </Stylecontent>
@@ -197,6 +194,7 @@ const Stylecontent = styled.div`
   }
 `;
 const H1 = styled.h1`
+  color: var(--color-h1);
   margin-bottom: 29px;
   font-size: 32px;
   @media ${device.laptop} {
@@ -354,7 +352,9 @@ const StyledSign = styled.div`
 const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
-  color: var(--color-textColor);
+  color: var(--color-h1);
+  font-weight: 600;
+  /* color: var(  --color-h1); */
 `;
 
 const AlignCenter = styled.div`

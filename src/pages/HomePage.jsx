@@ -1,14 +1,12 @@
 import styled from "styled-components";
-
-import { useContext } from "react";
-import { MovieContext } from "../context/MovieContext";
 import { Loading } from "../ui/Loading";
 import { MoviesList } from "../components/MoviesList";
 import { ErrorMessage } from "../ui/ErrorMessage";
 import { SearchInput } from "../ui/SearchInput";
+import { useMovie } from "../context/MovieContext";
 
 function HomePage() {
-  const { isLoading, error } = useContext(MovieContext);
+  const { isLoading, error } = useMovie();
 
   return (
     <HomeContainer>

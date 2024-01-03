@@ -8,6 +8,7 @@ const GlobalThemes = createGlobalStyle`
       --color-logo: rgba(214, 45, 48, 1);
       --color-light: #ffffff;
       --color-black: #232f3e;
+      --color-h1: #ffffff;
       --color-input: rgba(51, 51, 51, 1);
       --color-inputFont: rgba(140, 140, 140, 1);
       --color-btnsign: rgba(229, 9, 20, 1);
@@ -18,6 +19,8 @@ const GlobalThemes = createGlobalStyle`
         --color-textColor: rgb(23, 23, 23);
   --color-logo: rgba(214, 45, 48, 1);
   --color-light: #ffffff;
+
+  --color-h1: rgb(15, 15, 15);
   --color-black: #232f3e;
   --color-input: rgb(15, 15, 15);
   --color-inputFont: rgba(140, 140, 140, 1);

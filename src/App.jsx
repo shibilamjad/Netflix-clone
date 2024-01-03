@@ -33,7 +33,14 @@ function App() {
                   </ProtectedRouterLogin>
                 }
               />
-              <Route path="/sign-up" element={<SignUp />} />
+              <Route
+                path="/sign-up"
+                element={
+                  <ProtectedRouterLogin>
+                    <SignUp />
+                  </ProtectedRouterLogin>
+                }
+              />
               <Route path="*" element={<Error />} />
             </Route>
           </Routes>

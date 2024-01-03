@@ -1,8 +1,88 @@
 import styled from "styled-components";
 import { device } from "../ui/device";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import { useMovie } from "../context/MovieContext";
 
 export function SignUp() {
+  const [field, setField] = useState({
+    userName: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [errors, setErrors] = useState({
+    userName: false,
+    password: false,
+    confirmPassword: false,
+  });
+
+  const { isLoading, setQuery } = useMovie();
+  const { setIsLoggedIn } = useAuth();
+
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (isValidateSubmit()) {
+      setIsLoggedIn(true);
+      navigate("/");
+    }
+    setQuery("");
+  }
+
+  console.log(isLoading);
+  function handleChange(e) {
+    setField((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+    handleBlur(e);
+  }
+
+  function isValidateSubmit() {
+    const errors = {
+      userName: false,
+      password: false,
+    };
+
+    if (field.userName === "") {
+      errors.userName = true;
+    }
+
+    if (field.password === "") {
+      errors.password = true;
+    }
+    if (field.confirmPassword === "") {
+      errors.confirmPassword = true;
+    }
+    if (field.confirmPassword !== field.password) {
+      errors.confirmPassword = true;
+    }
+
+    setErrors(errors);
+    if (Object.values(errors).some((err) => err === true)) {
+      return false;
+    }
+    return true;
+  }
+
+  function handleBlur(e) {
+    const { name, value } = e.target;
+    let error = false;
+    if (name === "userName" && value === "") {
+      error = true;
+    } else if (name === "password" && value === "") {
+      error = true;
+    } else if (name === "confirmPassword" && value === "") {
+      error = true;
+    }
+    setErrors((prev) => ({
+      ...prev,
+      [name]: error,
+    }));
+  }
+
   return (
     <LoginContainer>
       <StyledLogin>
@@ -10,26 +90,47 @@ export function SignUp() {
           <div>
             <H1>Sign up</H1>
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div>
-              <Input type="text" placeholder="Username" />
+              <Input
+                type="text"
+                placeholder="Username"
+                name="userName"
+                onChange={handleChange}
+                value={field.userName}
+                onBlur={handleBlur}
+              />
+              {errors.userName && <Error>Username is required</Error>}
             </div>
             <div>
-              <Input type="text" placeholder="Email" />
+              <Input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={field.password}
+                onBlur={handleBlur}
+              />
+              {errors.password && <Error>Password is required</Error>}
+              <Input
+                type="password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                onChange={handleChange}
+                value={field.confirmPassword}
+                onBlur={handleBlur}
+              />
+              {errors.confirmPassword && <Error>Password is inCorrect</Error>}
             </div>
             <div>
-              <Input type="text" placeholder="Password" />
-            </div>
-            <div>
-              <Button type="submit">Sign up</Button>
+              <Button type="submit">Sign in</Button>
             </div>
           </form>
 
           <StyledSign>
             <AlignCenter>
               <p>Already have a account?</p>
-              &nbsp;
-              <NavLink to="/sign-in"> Sign in now.</NavLink>
+              &nbsp; <NavLink to="/sign-in"> Sign in now.</NavLink>
             </AlignCenter>
           </StyledSign>
         </Stylecontent>
@@ -47,7 +148,7 @@ const LoginContainer = styled.div`
 `;
 
 const StyledLogin = styled.div`
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--color-blacklight);
   width: 457px;
   height: 547px;
   border-radius: 4px;
@@ -77,9 +178,9 @@ const StyledLogin = styled.div`
 const Stylecontent = styled.div`
   display: flex;
   flex-direction: column;
-  color: var(--color-light);
+  color: var(--color-textColor);
   padding: 48px 60px 0px 60px;
-  font-size: 32px;
+  font-size: 15px;
   font-weight: 700;
 
   @media ${device.laptopL} {
@@ -99,16 +200,17 @@ const Stylecontent = styled.div`
   }
 `;
 const H1 = styled.h1`
+  color: var(--color-h1);
   margin-bottom: 29px;
   font-size: 32px;
   @media ${device.laptop} {
     font-size: 28px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
   @media ${device.laptopL} {
     font-size: 25px;
 
-    margin-bottom: 5px;
+    margin-bottom: 20px;
   }
   @media ${device.tablet} {
     font-size: 17px;
@@ -116,22 +218,26 @@ const H1 = styled.h1`
   }
   @media ${device.mobileL} {
     font-size: 14px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   @media ${device.mobileS} {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 14px;
   }
 `;
 const Input = styled.input`
-  font-size: 16px;
   padding: 10px 15px;
   width: 100%;
   border: transparent;
-  color: var(--color-inputFont);
+  color: var(--color-light);
+  font-weight: 200;
   background-color: var(--color-input);
   border-radius: 4px;
   margin-bottom: 16px;
+  &::placeholder {
+    font-size: 15px;
+    color: var(--color-inputFont);
+  }
   &:focus {
     outline: none;
   }
@@ -158,6 +264,12 @@ const Input = styled.input`
     padding: 6px 10px;
     margin-bottom: 4px;
   }
+`;
+
+const Error = styled.p`
+  font-size: 12px;
+  color: var(--color-btnsign);
+  font-weight: 300;
 `;
 const Button = styled.button`
   font-size: 16px;
@@ -200,14 +312,6 @@ const Button = styled.button`
     margin-bottom: 4px;
   }
 `;
-const P = styled.p`
-  display: flex;
-  justify-content: end;
-  font-size: 13px;
-  margin-top: 14px;
-  color: var(--color-textColor);
-  font-weight: 400;
-`;
 
 const StyledSign = styled.div`
   display: flex;
@@ -215,7 +319,7 @@ const StyledSign = styled.div`
   justify-content: center;
   font-weight: 400;
   font-size: 17px;
-  margin-top: 100px;
+  margin-top: 80px;
   p {
     color: var(--color-textColor);
     margin-top: 1rem;
@@ -223,19 +327,18 @@ const StyledSign = styled.div`
   @media ${device.laptopL} {
     font-size: 17px;
 
-    margin-top: 30px;
+    margin-top: 100px;
   }
   @media ${device.laptop} {
     font-size: 17px;
-    margin-top: 30px;
+    margin-top: 10px;
   }
   @media ${device.tablet} {
     font-size: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   @media ${device.mobileL} {
     font-size: 13px;
-
     margin-top: 10px;
   }
   @media ${device.mobileS} {
@@ -247,12 +350,14 @@ const StyledSign = styled.div`
 const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
-  color: var(--color-light);
+  color: var(--color-textColor);
+  font-weight: 600;
+  color: var(--color-h1);
 `;
 
 const AlignCenter = styled.div`
-  font-size: 12px;
   display: flex;
+  font-size: 12px;
   align-items: center;
   justify-content: center;
 `;

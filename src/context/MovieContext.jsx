@@ -1,9 +1,10 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
+import { useDebouncing } from "../hooks/useDebouncing";
 
 export const MovieContext = createContext();
 
-export function MovieProvider({ children }) {
+function MovieProvider({ children }) {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,6 @@ export function MovieProvider({ children }) {
   function handleChange(e) {
     setQuery(e.target.value);
   }
-
   async function initialMovies() {
     try {
       setIsLoading(true);
@@ -62,19 +62,7 @@ export function MovieProvider({ children }) {
     }
   }
 
-  useEffect(() => {
-    if (!query) {
-      initialMovies();
-    }
-    const timeout = setTimeout(() => {
-      if (query) {
-        fetchMovies();
-      }
-    }, 300);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [query]);
+  const searchQuery = useDebouncing(query, 300, initialMovies, fetchMovies);
 
   return (
     <MovieContext.Provider
@@ -92,3 +80,12 @@ export function MovieProvider({ children }) {
     </MovieContext.Provider>
   );
 }
+
+function useMovie() {
+  const context = useContext(MovieContext);
+  if (!context) {
+    throw new Error("useAuth must be used with a AuthProvider");
+  }
+  return context;
+}
+export { MovieProvider, useMovie };
