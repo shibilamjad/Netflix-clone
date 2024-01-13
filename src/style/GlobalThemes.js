@@ -5,6 +5,7 @@ const GlobalThemes = createGlobalStyle`
   
     &,&.dark-mode {
       --color-textColor: rgba(117, 117, 117, 1);
+      --color-description:  rgba(255, 255, 255, 0.80);
       --color-logo: rgba(214, 45, 48, 1);
       --color-light: #ffffff;
       --color-black: #232f3e;
@@ -19,7 +20,7 @@ const GlobalThemes = createGlobalStyle`
         --color-textColor: rgb(23, 23, 23);
   --color-logo: rgba(214, 45, 48, 1);
   --color-light: #ffffff;
-
+  --color-description: rgb(23, 23, 23);
   --color-h1: rgb(15, 15, 15);
   --color-black: #232f3e;
   --color-input: rgb(15, 15, 15);

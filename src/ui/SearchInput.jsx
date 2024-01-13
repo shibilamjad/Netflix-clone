@@ -40,23 +40,29 @@ const Input = styled.input`
   margin-bottom: 15px;
   position: relative;
   box-sizing: border-box;
+  transition: all 0.3;
   &:focus {
     outline: none;
   }
   @media ${device.mobileS} {
     padding: 10px 40px 10px 15px;
+    transition: all 0.3;
   }
   @media ${device.mobileL} {
     padding: 10px 40px 10px 15px;
+    transition: all 0.3;
   }
   @media ${device.tablet} {
     padding: 10px 40px 10px 15px;
+    transition: all 0.3;
   }
   @media ${device.laptop} {
     padding: 10px 40px 10px 15px;
+    transition: all 0.3;
   }
   @media ${device.laptopL} {
     padding: 10px 40px 10px 15px;
+    transition: all 0.3;
   }
 `;
 

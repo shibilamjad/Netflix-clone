@@ -9,8 +9,16 @@ function MovieProvider({ children }) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
+  const [movieDetails, setMovieDetails] = useState([]);
 
   let initialItem = "s";
+  function handleSelectedId(id) {
+    setSelectedId(id);
+  }
+  function handleClose() {
+    setSelectedId(null);
+  }
 
   function handleChange(e) {
     setQuery(e.target.value);
@@ -38,6 +46,24 @@ function MovieProvider({ children }) {
       setIsLoading(false);
     }
   }
+  async function getSelectedMovie() {
+    try {
+      const res = await axios(`https://api.themoviedb.org/3/search/movie`, {
+        params: {
+          api_key: `d3449ff6ec0c027623bf6b6f5fff78b3`,
+          movie_id: selectedId,
+          language: `en-US`,
+          page: 1,
+          include_adult: false,
+        },
+      });
+
+      setMovieDetails(res.data);
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
   async function fetchMovies() {
     try {
       setIsLoading(true);
@@ -74,6 +100,10 @@ function MovieProvider({ children }) {
         isLoading,
         setMovies,
         error,
+        movieDetails,
+        handleSelectedId,
+        selectedId,
+        handleClose,
       }}
     >
       {children}
