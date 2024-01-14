@@ -73,6 +73,6 @@ const Button = styled.button`
   color: var(--color-black);
   border: transparent;
   padding: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 25px;
   cursor: pointer;
 `;

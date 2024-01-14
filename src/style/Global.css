@@ -5,6 +5,7 @@
   font-family: "Rubik", sans-serif;
 }
 body {
+  background-image: url(../assets//bg.png);
   /* background-image: url("../../public/bg.png");
   background-size: cover; */
 }
