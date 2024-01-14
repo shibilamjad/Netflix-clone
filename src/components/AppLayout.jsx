@@ -7,7 +7,11 @@ import { device } from "../ui/device";
 function AppLayout() {
   return (
     <>
-      <StyledContainer>
+      <StyledContainer
+        style={{
+          backgroundImage: `url("../../public/bg.png")`,
+        }}
+      >
         <Bg>
           <Header />
           <Main>
@@ -25,9 +29,7 @@ export default AppLayout;
 const StyledContainer = styled.div`
   background-color: #d30000;
   width: 100%;
-
   display: grid;
-  background-image: url("../../public/bg.png");
   background-repeat: repeat;
   height: 100%;
   grid-template-rows: auto 1fr auto;
