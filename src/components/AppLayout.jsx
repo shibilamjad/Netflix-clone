@@ -7,11 +7,7 @@ import { device } from "../ui/device";
 function AppLayout() {
   return (
     <>
-      <StyledContainer
-        style={{
-          backgroundImage: `url("../../public/bg.png")`,
-        }}
-      >
+      <StyledContainer>
         <Bg>
           <Header />
           <Main>
@@ -19,6 +15,7 @@ function AppLayout() {
           </Main>
           <Footer />
         </Bg>
+        <BackgroundImage src="../../public/bg.png" />
       </StyledContainer>
     </>
   );
@@ -27,7 +24,8 @@ function AppLayout() {
 export default AppLayout;
 
 const StyledContainer = styled.div`
-  background-color: #d30000;
+  /* background-color: #d30000; */
+  position: relative;
   width: 100%;
   display: grid;
   background-repeat: repeat;
@@ -55,4 +53,14 @@ const Main = styled.main`
 `;
 const Bg = styled.div`
   background-color: var(--color-bg);
+  position: relative;
+`;
+const BackgroundImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the background image is behind other content */
 `;
