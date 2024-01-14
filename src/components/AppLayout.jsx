@@ -27,7 +27,7 @@ const StyledContainer = styled.div`
   width: 100%;
 
   display: grid;
-  background-image: url("/../../public/bg.png");
+  background-image: url("/../../public/bg.jpg");
   background-repeat: repeat;
   height: 100%;
   grid-template-rows: auto 1fr auto;
