@@ -15,7 +15,6 @@ function AppLayout() {
           </Main>
           <Footer />
         </Bg>
-        <BackgroundImage src="../../public/bg.png" />
       </StyledContainer>
     </>
   );
@@ -24,10 +23,11 @@ function AppLayout() {
 export default AppLayout;
 
 const StyledContainer = styled.div`
-  /* background-color: #d30000; */
-  position: relative;
+  background-color: #d30000;
   width: 100%;
+
   display: grid;
+  background-image: url("/../../public/bg.png");
   background-repeat: repeat;
   height: 100%;
   grid-template-rows: auto 1fr auto;
@@ -53,14 +53,4 @@ const Main = styled.main`
 `;
 const Bg = styled.div`
   background-color: var(--color-bg);
-  position: relative;
-`;
-const BackgroundImage = styled.img`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* Ensure the background image is behind other content */
 `;
