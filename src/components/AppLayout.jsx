@@ -23,7 +23,7 @@ function AppLayout() {
 export default AppLayout;
 
 const StyledContainer = styled.div`
-  background-color: #d30000;
+  /* background-color: #d30000; */
   width: 100%;
 
   display: grid;
