@@ -6,8 +6,8 @@
 
 <p>This is a web application built using React.js,styled component, Axios, React Icons and The Movie DB API. The app allows users to search for movies.</p>
 
-<p>Preview</p>
-<a href="https://vercel.com/shibilamjads-projects/netflix-clone" />
+[Preview(https://vercel.com/shibilamjads-projects/netflix-clone)]
+
 <h2>Features
 </h2>
 <ul>
